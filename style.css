@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  font-family: 'Lato', sans-serif;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+}
+
+.mission-box {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 160px;
+  font-family: 'Lato', sans-serif;
+}
+
+.mission-title {
+  padding: 12px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  background: #ef0100;
+  color: white;
+}
+
+.mission-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  border-radius: 8px;
+  margin-top: 8px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  background: #ef0100;
+  color: white;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.mission-box:hover .mission-content {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.container {
+  text-align: center;
+}
+
+.title-box {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.attendance-button {
+  width: 350px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.attendance-button:hover {
+  transform: scale(1.05);
+}
+
+.attendance-button:active {
+  transform: scale(0.97);
+}
