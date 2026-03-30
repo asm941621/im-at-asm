@@ -2,39 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ASM Attendance</title>
-  <link rel="stylesheet" href="style.css">
+  <title>ASM Access</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f5f5;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .login-card {
+      width: 360px;
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+
+    p {
+      margin: 0 0 24px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 16px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-family: inherit;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    button:hover {
+      opacity: 0.92;
+    }
+
+    .error {
+      margin-top: 14px;
+      color: #c62828;
+      font-size: 14px;
+      min-height: 18px;
+    }
+  </style>
 </head>
 <body>
+  <div class="login-card">
+    <h1>ASM Scanner</h1>
+    <p>Enter password to continue</p>
 
-<img src="logo.svg" class="logo" alt="School Logo">
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button id="loginBtn">Enter</button>
 
-<div class="mission-box">
-  <div class="mission-title">our mission</div>
-  <div class="mission-content">
-    Much like the country of Bangladesh, Wise Sons Jewish Deli faces a serious overcrowding
-    problem on Tuesday mornings. We have teamed up with SFUHS, Orah, and Benjamin Netanyahu
-    to create a simple solution. You may now attend ASM without going near California Campus
-    (or even the state of California).
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="title-box">
-    click to attend ASM
+    <div class="error" id="errorMsg"></div>
   </div>
 
-  <img
-    src="orah.png"
-    id="attendanceButton"
-    class="attendance-button"
-    alt="Click for Attendance"
-  >
+  <script>
+    const PASSWORD = "3065";
+    const input = document.getElementById("passwordInput");
+    const button = document.getElementById("loginBtn");
+    const errorMsg = document.getElementById("errorMsg");
 
-</div>
+    function checkPassword() {
+      if (input.value === PASSWORD) {
+        window.location.href = "attendance.html";
+      } else {
+        errorMsg.textContent = "Incorrect password";
+      }
+    }
 
-<script src="script.js?v=3"></script>
+    button.addEventListener("click", checkPassword);
 
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        checkPassword();
+      }
+    });
+  </script>
 </body>
 </html>
