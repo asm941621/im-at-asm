@@ -1,6 +1,8 @@
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 96px 24px 32px;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,8 +62,15 @@ body {
   pointer-events: auto;
 }
 
+.mission-box:focus-within .mission-content {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 .container {
   text-align: center;
+  width: min(100%, 420px);
 }
 
 .title-box {
@@ -72,17 +81,37 @@ body {
 }
 
 .attendance-button {
-  width: 350px;
+  width: min(350px, 100%);
+  padding: 0;
+  border: 0;
+  background: transparent;
   cursor: pointer;
   transition: transform 0.15s ease;
 }
 
-.attendance-button:hover {
+.attendance-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.attendance-button:hover:not(:disabled) {
   transform: scale(1.05);
 }
 
-.attendance-button:active {
+.attendance-button:active:not(:disabled) {
   transform: scale(0.97);
+}
+
+.attendance-button:focus-visible {
+  outline: 3px solid rgba(239, 1, 0, 0.25);
+  outline-offset: 6px;
+  border-radius: 18px;
+}
+
+.attendance-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
 }
 
 .countdown {
@@ -92,4 +121,66 @@ body {
   font-weight: 700;
   color: #222;
   text-align: center;
+}
+
+.attendance-hint {
+  margin: 12px auto 0;
+  max-width: 28rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  body {
+    padding-top: 140px;
+  }
+
+  .logo {
+    width: 220px;
+  }
+}
+
+@media (max-width: 720px) {
+  body {
+    padding: 24px 16px 32px;
+    align-items: flex-start;
+  }
+
+  .logo,
+  .mission-box {
+    position: static;
+  }
+
+  .logo {
+    width: min(220px, 60vw);
+    margin: 0 auto 20px;
+    display: block;
+  }
+
+  .mission-box {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 20px;
+  }
+
+  .mission-content {
+    position: static;
+    width: auto;
+    margin-top: 8px;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .container {
+    margin: 0 auto;
+  }
+
+  .title-box {
+    font-size: 24px;
+  }
+
+  .countdown {
+    font-size: 20px;
+  }
 }

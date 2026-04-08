@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASM Attendance</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<img src="logo.svg" class="logo" alt="School Logo">
+<img src="logo.svg" class="logo" alt="School logo">
 
 <div class="mission-box">
-  <div class="mission-title">our mission</div>
+  <div class="mission-title" tabindex="0">our mission</div>
   <div class="mission-content">
     Much like the country of Bangladesh, Wise Sons Jewish Deli faces a serious overcrowding
     problem on Tuesday mornings. We have teamed up with SFUHS, Orah, and Benjamin Netanyahu
@@ -26,14 +27,20 @@
     click to attend ASM
   </div>
 
-  <img
-    src="orah.png"
+  <button
     id="attendanceButton"
     class="attendance-button"
-    alt="Click for Attendance"
+    type="button"
+    aria-describedby="countdownText attendanceHint"
   >
+    <img
+      src="orah.png"
+      alt="Tap to scan attendance"
+    >
+  </button>
 
-  <div class="countdown" id="countdownText"></div>
+  <p class="countdown" id="countdownText" aria-live="polite"></p>
+  <p class="attendance-hint" id="attendanceHint"></p>
 
 </div>
 
