@@ -1,7 +1,21 @@
 const button = document.getElementById("attendanceButton");
 const countdownText = document.getElementById("countdownText");
 const attendanceHint = document.getElementById("attendanceHint");
-const attendanceUrl = "https://app.boardingware.com/nfc/tag?v=5&u=04E3C43A561490&c=000978";
+const attendanceUrlBase = "https://app.boardingware.com/nfc/tag?v=5&u=04E3C43A561490&c=";
+const attendanceCodeBase = 0x000978;
+const attendanceCodeStep = 0x5;
+
+function getAsmStart(now) {
+  const start = new Date(now);
+  start.setHours(9, 55, 0, 0);
+  return start;
+}
+
+function getAttendanceCode(now) {
+  const minutesSinceStart = Math.floor((now - getAsmStart(now)) / (60 * 1000));
+  const currentCode = attendanceCodeBase + (minutesSinceStart * attendanceCodeStep);
+  return currentCode.toString(16).toUpperCase().padStart(6, "0");
+}
 
 function isAttendanceWindow(now) {
   const day = now.getDay();
@@ -18,12 +32,14 @@ function isAttendanceWindow(now) {
 }
 
 button.addEventListener("click", () => {
-  if (!isAttendanceWindow(new Date())) {
+  const now = new Date();
+
+  if (!isAttendanceWindow(now)) {
     countdownText.textContent = "Scanning opens Tuesday at 9:55 AM";
     return;
   }
 
-  window.location.href = attendanceUrl;
+  window.location.href = `${attendanceUrlBase}${getAttendanceCode(now)}`;
 });
 
 function getNextTuesdayAt955(now) {
@@ -46,7 +62,7 @@ function updateCountdown() {
 
   if (isAttendanceWindow(now)) {
     countdownText.textContent = "Ready to scan";
-    attendanceHint.textContent = "The attendance button is active right now.";
+    attendanceHint.textContent = `The attendance button is active right now. Current code: ${getAttendanceCode(now)}.`;
     button.disabled = false;
     return;
   }
